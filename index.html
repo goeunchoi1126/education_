@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>강의 자료</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">강의 자료</div>
+    <nav class="tabs" id="tabs">
+      <button id="aboutTab" class="tab-about">강사 소개</button>
+      <span class="tab-divider"></span>
+    </nav>
+  </header>
+
+  <!-- 강사 소개 -->
+  <main class="viewer about" id="aboutView" hidden>
+    <section class="about-card">
+      <div class="about-top">
+        <img class="about-photo" src="about/profile.jpg" alt="강사 사진"
+             onerror="this.style.display='none'" />
+        <div class="about-head">
+          <h2 class="about-name">최고은</h2>
+          <p class="about-role">델리아(DELIA) 대표 · SNS 마케팅 &amp; AI 콘텐츠 전문가</p>
+          <p class="about-intro">
+            글로벌 빅테크에서 콘텐츠 전략과 데이터 기반 마케팅을 담당했으며,
+            현재는 SNS 마케팅 대행사를 운영하며 현장 중심의 교육과 컨설팅을 진행하고 있습니다.
+          </p>
+        </div>
+      </div>
+
+      <div class="about-body">
+        <h3>경력</h3>
+        <ul class="about-list">
+          <li><span class="tag tag-now">현</span> 델리아(DELIA) 대표</li>
+          <li><span class="tag">전</span> AliExpress Korea 콘텐츠 전략</li>
+          <li><span class="tag">전</span> NOL universe 콘텐츠 기획</li>
+        </ul>
+
+        <h3>학력</h3>
+        <ul class="about-list">
+          <li>이화여자대학교 데이터사이언스 대학원</li>
+          <li>Tsinghua University 영어영문학과</li>
+        </ul>
+
+        <h3>자격증 및 교육 이수</h3>
+        <ul class="about-list">
+          <li>SNS 마케팅 전문가 1급</li>
+          <li>문화산업 창업학교 교육 이수</li>
+        </ul>
+
+        <h3>주요 강의 및 컨설팅 도메인</h3>
+        <ul class="about-list bullets">
+          <li>AI를 활용한 업무 생산성 강화 · 업무 자동화</li>
+          <li>AI 콘텐츠 제작 · 데이터 분석</li>
+          <li>마케팅 기획 · SNS 운영</li>
+          <li>250명 이상의 수강생 커리어 멘토링</li>
+        </ul>
+
+        <h3>현장 중심의 교육 및 출강 이력</h3>
+        <ul class="about-list bullets">
+          <li><strong>KDT 장기 교육</strong> | 팀 스파르타 · 에이블런</li>
+          <li><strong>공공기관 교육</strong> | 서울글로벌센터</li>
+          <li><strong>대학교 교육</strong> | 청주대학교</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- 챕터 뷰어 -->
+  <main class="viewer" id="chapterView">
+    <h2 class="chapter-title" id="chapterTitle"></h2>
+    <div class="pages" id="pages"></div>
+    <p class="empty" id="empty" hidden>이 챕터의 페이지 이미지가 아직 없습니다. convert.sh 를 실행해 주세요.</p>
+  </main>
+
+  <footer class="pager" id="pager">
+    <button id="prevBtn">&larr; 이전 챕터</button>
+    <span id="pagerInfo"></span>
+    <button id="nextBtn">다음 챕터 &rarr;</button>
+  </footer>
+
+  <script src="chapters.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
