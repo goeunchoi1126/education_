@@ -60,6 +60,7 @@ function showChapter(i) {
   emptyEl.hidden = ch.pages > 0;
 
   for (let p = 1; p <= ch.pages; p++) {
+    if (ch.id === "ch1" && (p === 67 || p === 68)) continue;
     const img = document.createElement("img");
     img.src = `pages/${ch.id}/${pad(p)}.webp`;
     img.alt = `${ch.title} - ${p}페이지`;
