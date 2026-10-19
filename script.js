@@ -61,11 +61,30 @@ function showChapter(i) {
 
   for (let p = 1; p <= ch.pages; p++) {
     if (ch.id === "ch1" && (p === 67 || p === 68)) continue;
+    const slide = document.createElement("div");
+    slide.className = "slide";
     const img = document.createElement("img");
     img.src = `pages/${ch.id}/${pad(p)}.webp`;
     img.alt = `${ch.title} - ${p}페이지`;
     img.loading = "lazy";
-    pagesEl.appendChild(img);
+    slide.appendChild(img);
+
+    for (const link of PAGE_LINKS[ch.id]?.[p] || []) {
+      const anchor = document.createElement("a");
+      anchor.className = "slide-link";
+      anchor.href = link.url;
+      anchor.target = "_blank";
+      anchor.rel = "noopener noreferrer";
+      anchor.setAttribute("aria-label", `${p}페이지 링크 열기: ${link.url}`);
+      anchor.title = link.url;
+      anchor.style.left = `${link.x}%`;
+      anchor.style.top = `${link.y}%`;
+      anchor.style.width = `${link.width}%`;
+      anchor.style.height = `${link.height}%`;
+      slide.appendChild(anchor);
+    }
+
+    pagesEl.appendChild(slide);
   }
 
   prevBtn.disabled = i === 0;

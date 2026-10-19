@@ -120,6 +120,11 @@ body {
 
 .pages { display: flex; flex-direction: column; gap: 16px; }
 
+.slide { position: relative; }
+.slide-link { position: absolute; cursor: pointer; }
+.slide-link:hover { outline: 2px solid #2563eb; outline-offset: 2px; }
+.slide-link:focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; }
+
 .pages img {
   width: 100%;
   display: block;
