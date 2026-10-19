@@ -88,6 +88,29 @@ const PAGE_LINKS = {
         "height": 2.8717
       }
     ],
+    "91": [
+      {
+        "url": "https://www.miricanvas.com/ko",
+        "x": 8.8542,
+        "y": 37.1056,
+        "width": 8.1,
+        "height": 3.9762
+      },
+      {
+        "url": "https://www.canva.com/ko_kr/",
+        "x": 38.5417,
+        "y": 37.1056,
+        "width": 5.5598,
+        "height": 3.9762
+      },
+      {
+        "url": "https://vcat.ai/",
+        "x": 68.2292,
+        "y": 37.1056,
+        "width": 4.86,
+        "height": 3.9762
+      }
+    ],
     "94": [
       {
         "url": "https://www.codenbutter.com/blog/%EC%84%B1%EA%B3%B5%EC%A0%81%EC%9D%B8-%EB%A9%94%ED%83%80-ab%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%9D%98-%EC%A1%B0%EA%B1%B4/",
@@ -102,6 +125,15 @@ const PAGE_LINKS = {
         "y": 95.8437,
         "width": 14.4397,
         "height": 2.5404
+      }
+    ],
+    "108": [
+      {
+        "url": "https://www.miricanvas.com/ko",
+        "x": 8.8542,
+        "y": 76.3469,
+        "width": 7.2,
+        "height": 3.5344
       }
     ]
   }

@@ -24,6 +24,18 @@ URL_TEXT = re.compile(
     re.IGNORECASE,
 )
 
+# URL 대신 서비스 이름만 적힌 도구 소개 슬라이드의 공식 사이트
+NAMED_LINKS = {
+    "ch2": {
+        91: {
+            "미리캔버스": "https://www.miricanvas.com/ko",
+            "Canva": "https://www.canva.com/ko_kr/",
+            "브이캣": "https://vcat.ai/",
+        },
+        108: {"미리캔버스": "https://www.miricanvas.com/ko"},
+    },
+}
+
 
 def region(rect, page, url):
     """PDF 좌표를 반응형 이미지에서도 유지되는 % 좌표로 변환합니다."""
@@ -72,6 +84,10 @@ def extract():
                         if rect.is_empty or any(not (rect & existing).is_empty for existing in annotation_rects):
                             continue
                         links.append(region(rect, page, url))
+
+                for label, url in NAMED_LINKS.get(chapter, {}).get(page_number, {}).items():
+                    for rect in page.search_for(label):
+                        links.append(region(rect & page.rect, page, url))
                 if links:
                     pages[str(page_number)] = links
         if pages:
