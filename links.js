@@ -136,5 +136,50 @@ const PAGE_LINKS = {
         "height": 3.5344
       }
     ]
+  },
+  "ch3": {
+    "19": [
+      {
+        "url": "https://wadiz.io/web/campaign/detail/419723",
+        "x": 77.3153,
+        "y": 94.9222,
+        "width": 21.8765,
+        "height": 2.6508
+      }
+    ],
+    "27": [
+      {
+        "url": "https://www.instagram.com/p/DfMSTBkmvBB/?img_index=1",
+        "x": 42.1875,
+        "y": 90.5556,
+        "width": 15.625,
+        "height": 3.3333
+      }
+    ],
+    "29": [
+      {
+        "url": "https://wadiz.io/web/campaign/detail/419975",
+        "x": 76.9417,
+        "y": 95.5704,
+        "width": 21.414,
+        "height": 2.6508
+      }
+    ],
+    "58": [
+      {
+        "url": "https://gemini.google.com/app/73aba8abfdf0607c?hl=ko",
+        "x": 22.7083,
+        "y": 90.3704,
+        "width": 12.9167,
+        "height": 3.3333
+      },
+      {
+        "url": "https://chatgpt.com/share/6ae8bffe-5e98-83ec-b8a7-898907cf19d8",
+        "x": 64.6354,
+        "y": 90.3704,
+        "width": 12.3958,
+        "height": 3.3333
+      }
+    ]
   }
 };

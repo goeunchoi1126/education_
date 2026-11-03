@@ -13,13 +13,13 @@ cd "$(dirname "$0")"
 
 DPI=${DPI:-110}   # 해상도. 선명하게 하려면 150, 용량 줄이려면 90
 
-# 웹사이트에 공개할 챕터 번호. 나중에 "1 2" 처럼 추가하면 됩니다.
-PUBLISH="1"
+# 웹사이트에 공개할 챕터 번호. 나중에 "1 2 3 4" 처럼 추가하면 됩니다.
+PUBLISH="1 2 3"
 
 declare -a TITLES=(
   "Chapter 1. 마케팅에 대한 이해 및 AI를 활용한 마케팅"
-  "Chapter 2. 광고 소재 기획"
-  "Chapter 3. 제목을 입력하세요"
+  "Chapter 2. 가장 쉽게 배우는 광고 소재 기획"
+  "Chapter 3. 광고 랜딩페이지와 콘텐츠 전환 구조 설계"
   "Chapter 4. 제목을 입력하세요"
   "Chapter 5. 제목을 입력하세요"
 )
@@ -48,7 +48,12 @@ for i in 1 2 3 4 5; do
     if [ "${FORCE:-0}" = "1" ] || [ -z "$(ls "$out"/*.webp 2>/dev/null)" ] || [ "$pdf" -nt "$out/01.webp" ]; then
       echo "[$id] 변환 중: $pdf"
       rm -f "$out"/*.webp
-      pdftoppm -r "$DPI" -png "$pdf" "$out/p" 2>/dev/null
+      if [ "$id" = "ch2" ]; then
+        # 원본의 111~114페이지는 변환하지 않아 공개 폴더에 남지 않음
+        pdftoppm -f 1 -l 110 -r "$DPI" -png "$pdf" "$out/p" 2>/dev/null
+      else
+        pdftoppm -r "$DPI" -png "$pdf" "$out/p" 2>/dev/null
+      fi
       n=0
       for f in "$out"/p-*.png; do
         [ -e "$f" ] || continue
@@ -60,11 +65,21 @@ for i in 1 2 3 4 5; do
       echo "  -> $n 페이지"
     else
       n=$(ls "$out"/*.webp | wc -l | tr -d ' ')
+      # Chapter 1의 67·68페이지는 공개하지 않으므로 기존 이미지 수에 포함되지 않음
+      if [ "$id" = "ch1" ]; then n=$((n+2)); fi
       echo "[$id] 변환 생략 (이미 $n 페이지 있음)"
     fi
   else
     echo "[$id] $pdf 없음 - 건너뜀"
     continue
+  fi
+
+  # Chapter 1에서는 67·68페이지만 제외하고 69페이지는 유지
+  if [ "$id" = "ch1" ]; then
+    rm -f "$out/67.webp" "$out/68.webp"
+  fi
+  if [ "$id" = "ch2" ]; then
+    rm -f "$out/111.webp" "$out/112.webp" "$out/113.webp" "$out/114.webp"
   fi
 
   echo "  { id: \"$id\", title: \"$title\", pages: $n }," >> chapters.js
