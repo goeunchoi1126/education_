@@ -67,6 +67,13 @@ for i in 1 2 3 4 5; do
       n=$(ls "$out"/*.webp | wc -l | tr -d ' ')
       # Chapter 1의 67·68페이지는 공개하지 않으므로 기존 이미지 수에 포함되지 않음
       if [ "$id" = "ch1" ]; then n=$((n+2)); fi
+      # Chapter 3의 마지막 공개 이미지는 61페이지 (중간 54~60 제외)
+      if [ "$id" = "ch3" ]; then
+        for f in "$out"/*.webp; do
+          page=$(basename "$f" .webp)
+          if (( 10#$page > n )); then n=$((10#$page)); fi
+        done
+      fi
       echo "[$id] 변환 생략 (이미 $n 페이지 있음)"
     fi
   else
@@ -80,6 +87,9 @@ for i in 1 2 3 4 5; do
   fi
   if [ "$id" = "ch2" ]; then
     rm -f "$out/111.webp" "$out/112.webp" "$out/113.webp" "$out/114.webp"
+  fi
+  if [ "$id" = "ch3" ]; then
+    rm -f "$out"/{54,55,56,57,58,59,60}.webp
   fi
 
   echo "  { id: \"$id\", title: \"$title\", pages: $n }," >> chapters.js

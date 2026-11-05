@@ -164,22 +164,6 @@ const PAGE_LINKS = {
         "width": 21.414,
         "height": 2.6508
       }
-    ],
-    "58": [
-      {
-        "url": "https://gemini.google.com/app/73aba8abfdf0607c?hl=ko",
-        "x": 22.7083,
-        "y": 90.3704,
-        "width": 12.9167,
-        "height": 3.3333
-      },
-      {
-        "url": "https://chatgpt.com/share/6ae8bffe-5e98-83ec-b8a7-898907cf19d8",
-        "x": 64.6354,
-        "y": 90.3704,
-        "width": 12.3958,
-        "height": 3.3333
-      }
     ]
   }
 };
