@@ -16,6 +16,7 @@ CHAPTERS = {
     "ch1": {"last_page": 69, "hidden": {67, 68}},
     "ch2": {"last_page": 110, "hidden": set()},
     "ch3": {"last_page": 61, "hidden": set(range(54, 61))},
+    "ch4": {"last_page": 39, "hidden": set()},
 }
 
 URL_TEXT = re.compile(
