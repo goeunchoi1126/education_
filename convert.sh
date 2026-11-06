@@ -93,11 +93,11 @@ for i in 1 2 3 4 5; do
     rm -f "$out"/{54,55,56,57,58,59,60}.webp
   fi
   if [ "$id" = "ch4" ]; then
-    # 새 PDF의 2·1페이지를 각각 33·34페이지에 넣고, 36페이지는 제외
+    # 새 PDF의 1·2페이지를 각각 33·34페이지에 넣고, 36페이지는 제외
     replacement="pdf/ch4-replacement.pdf"
     if [ -f "$replacement" ] && { [ "${FORCE:-0}" = "1" ] || [ "$replacement" -nt "$out/33.webp" ] || [ "$replacement" -nt "$out/34.webp" ]; }; then
       for page in 1 2; do
-        target=$((35-page))
+        target=$((page+32))
         pdftoppm -f "$page" -l "$page" -singlefile -r "$DPI" -png "$replacement" "$out/replacement" 2>/dev/null
         cwebp -quiet -q 82 "$out/replacement.png" -o "$out/$target.webp"
         rm -f "$out/replacement.png"
