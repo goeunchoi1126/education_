@@ -62,6 +62,7 @@ function showChapter(i) {
   for (let p = 1; p <= ch.pages; p++) {
     if (ch.id === "ch1" && (p === 67 || p === 68)) continue;
     if (ch.id === "ch3" && p >= 54 && p <= 60) continue;
+    if (ch.id === "ch4" && p === 36) continue;
     const slide = document.createElement("div");
     slide.className = "slide";
     const img = document.createElement("img");

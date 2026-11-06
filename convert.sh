@@ -91,6 +91,20 @@ for i in 1 2 3 4 5; do
   if [ "$id" = "ch3" ]; then
     rm -f "$out"/{54,55,56,57,58,59,60}.webp
   fi
+  if [ "$id" = "ch4" ]; then
+    # 새 PDF의 1·2페이지로 기존 33·34페이지를 교체하고, 36페이지는 제외
+    replacement="pdf/ch4-replacement.pdf"
+    if [ -f "$replacement" ] && { [ "${FORCE:-0}" = "1" ] || [ "$replacement" -nt "$out/33.webp" ] || [ "$replacement" -nt "$out/34.webp" ]; }; then
+      for page in 1 2; do
+        target=$((page+32))
+        pdftoppm -f "$page" -l "$page" -singlefile -r "$DPI" -png "$replacement" "$out/replacement" 2>/dev/null
+        cwebp -quiet -q 82 "$out/replacement.png" -o "$out/$target.webp"
+        rm -f "$out/replacement.png"
+      done
+    fi
+    rm -f "$out/36.webp"
+    n=39
+  fi
   echo "  { id: \"$id\", title: \"$title\", pages: $n }," >> chapters.js
 done
 
