@@ -67,6 +67,7 @@ function showChapter(i) {
     slide.className = "slide";
     const img = document.createElement("img");
     img.src = `pages/${ch.id}/${pad(p)}.webp`;
+    if (ch.id === "ch4" && (p === 33 || p === 34)) img.src += "?order=20261106";
     img.alt = `${ch.title} - ${p}페이지`;
     img.loading = "lazy";
     slide.appendChild(img);
