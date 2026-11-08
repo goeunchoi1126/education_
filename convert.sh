@@ -104,7 +104,26 @@ for i in 1 2 3 4 5; do
       done
     fi
     rm -f "$out/36.webp"
-    n=39
+    # 추가 PDF는 기존 39페이지 뒤에 이어 붙입니다 (40페이지부터).
+    appendix="pdf/ch4-append.pdf"
+    if [ -f "$appendix" ]; then
+      added=$(pdfinfo "$appendix" | awk '/^Pages:/ {print $2}')
+      if [ "${FORCE:-0}" = "1" ] || [ ! -f "$out/40.webp" ] || [ "$appendix" -nt "$out/40.webp" ]; then
+        rm -f "$out"/{40..99}.webp "$out"/append-*.png
+        pdftoppm -r "$DPI" -png "$appendix" "$out/append" 2>/dev/null
+        page=39
+        for f in "$out"/append-*.png; do
+          [ -e "$f" ] || continue
+          page=$((page+1))
+          cwebp -quiet -q 82 "$f" -o "$out/$page.webp"
+          rm -f "$f"
+        done
+        [ "$page" -eq $((39+added)) ] || { echo "추가 PDF 변환 페이지 수가 일치하지 않습니다"; exit 1; }
+      fi
+      n=$((39+added))
+    else
+      n=39
+    fi
   fi
   echo "  { id: \"$id\", title: \"$title\", pages: $n }," >> chapters.js
 done

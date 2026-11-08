@@ -165,5 +165,50 @@ const PAGE_LINKS = {
         "height": 2.6508
       }
     ]
+  },
+  "ch4": {
+    "59": [
+      {
+        "url": "https://support.google.com/analytics/answer/9756891?hl=ko",
+        "x": 82.7604,
+        "y": 93.8889,
+        "width": 10.9896,
+        "height": 2.6852
+      }
+    ],
+    "60": [
+      {
+        "url": "https://support.google.com/analytics/answer/9756891?hl=ko",
+        "x": 82.7604,
+        "y": 87.7778,
+        "width": 10.9896,
+        "height": 2.6852
+      }
+    ],
+    "69": [
+      {
+        "url": "https://ga-dev-tools.google/campaign-url-builder/",
+        "x": 82.4479,
+        "y": 89.7222,
+        "width": 11.3021,
+        "height": 2.6852
+      }
+    ],
+    "73": [
+      {
+        "url": "https://analytics.google.com/analytics/web/?utm_source=demoaccount&utm_medium=demoaccount&utm_campaign=demoaccount#/a54516992p213025502/reports/intelligenthome",
+        "x": 9.375,
+        "y": 35.2778,
+        "width": 36.5104,
+        "height": 4.6296
+      },
+      {
+        "url": "https://shop.merch.google/?srsltid=AYCX9vKwQpaQL1ZmJVHSyRDzF2iNkP3upq2ph7Jpy9WHF8cPm55CKOji",
+        "x": 64.8958,
+        "y": 36.2963,
+        "width": 26.7708,
+        "height": 3.3333
+      }
+    ]
   }
 };

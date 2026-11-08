@@ -17,6 +17,7 @@ CHAPTERS = {
     "ch2": {"last_page": 110, "hidden": set()},
     "ch3": {"last_page": 61, "hidden": set(range(54, 61))},
     "ch4": {"last_page": 39, "hidden": {33, 34, 36}},
+    "ch4-append": {"last_page": 34, "hidden": set(), "offset": 39, "chapter": "ch4"},
 }
 
 URL_TEXT = re.compile(
@@ -59,9 +60,10 @@ def extract():
         pages = {}
         with fitz.open(pdf) as document:
             for index in range(min(len(document), config["last_page"])):
-                page_number = index + 1
-                if page_number in config["hidden"]:
+                source_page = index + 1
+                if source_page in config["hidden"]:
                     continue
+                page_number = source_page + config.get("offset", 0)
                 page = document[index]
                 links = []
                 annotation_rects = []
@@ -87,13 +89,13 @@ def extract():
                             continue
                         links.append(region(rect, page, url))
 
-                for label, url in NAMED_LINKS.get(chapter, {}).get(page_number, {}).items():
+                for label, url in NAMED_LINKS.get(chapter, {}).get(source_page, {}).items():
                     for rect in page.search_for(label):
                         links.append(region(rect & page.rect, page, url))
                 if links:
                     pages[str(page_number)] = links
         if pages:
-            result[chapter] = pages
+            result.setdefault(config.get("chapter", chapter), {}).update(pages)
     return result
 
 
