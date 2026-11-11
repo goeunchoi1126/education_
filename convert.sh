@@ -109,7 +109,7 @@ for i in 1 2 3 4 5; do
     if [ -f "$appendix" ]; then
       added=$(pdfinfo "$appendix" | awk '/^Pages:/ {print $2}')
       if [ "${FORCE:-0}" = "1" ] || [ ! -f "$out/40.webp" ] || [ "$appendix" -nt "$out/40.webp" ]; then
-        rm -f "$out"/{40..99}.webp "$out"/append-*.png
+        rm -f "$out"/{40..73}.webp "$out"/append-*.png
         pdftoppm -r "$DPI" -png "$appendix" "$out/append" 2>/dev/null
         page=39
         for f in "$out"/append-*.png; do
@@ -123,6 +123,24 @@ for i in 1 2 3 4 5; do
       n=$((39+added))
     else
       n=39
+    fi
+    # 두 번째 추가 PDF는 앞의 34페이지가 끝난 뒤(74페이지부터) 이어 붙입니다.
+    appendix2="pdf/ch4-append-2.pdf"
+    if [ -f "$appendix2" ]; then
+      added2=$(pdfinfo "$appendix2" | awk '/^Pages:/ {print $2}')
+      if [ "${FORCE:-0}" = "1" ] || [ ! -f "$out/74.webp" ] || [ "$appendix2" -nt "$out/74.webp" ]; then
+        rm -f "$out"/{74..99}.webp "$out"/append2-*.png
+        pdftoppm -r "$DPI" -png "$appendix2" "$out/append2" 2>/dev/null
+        page=73
+        for f in "$out"/append2-*.png; do
+          [ -e "$f" ] || continue
+          page=$((page+1))
+          cwebp -quiet -q 82 "$f" -o "$out/$page.webp"
+          rm -f "$f"
+        done
+        [ "$page" -eq $((73+added2)) ] || { echo "두 번째 추가 PDF 변환 페이지 수가 일치하지 않습니다"; exit 1; }
+      fi
+      n=$((73+added2))
     fi
   fi
   echo "  { id: \"$id\", title: \"$title\", pages: $n }," >> chapters.js
