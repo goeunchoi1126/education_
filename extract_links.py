@@ -38,6 +38,9 @@ NAMED_LINKS = {
         },
         108: {"미리캔버스": "https://www.miricanvas.com/ko"},
     },
+    "ch4-append-2": {
+        4: {"메타 광고 캠페인 목표": "https://www.facebook.com/business/help/1438417719786914"},
+    },
 }
 
 

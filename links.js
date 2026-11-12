@@ -209,6 +209,15 @@ const PAGE_LINKS = {
         "width": 26.7708,
         "height": 3.3333
       }
+    ],
+    "77": [
+      {
+        "url": "https://www.facebook.com/business/help/1438417719786914",
+        "x": 6.25,
+        "y": 6.6306,
+        "width": 23.2016,
+        "height": 5.9644
+      }
     ]
   }
 };
