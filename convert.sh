@@ -149,6 +149,24 @@ for i in 1 2 3 4 5; do
       cwebp -quiet -q 82 "$out/hold-replacement.png" -o "$out/96.webp"
       rm -f "$out/hold-replacement.png"
     fi
+    # 세 번째 추가 PDF는 '언제 버틴다' 다음인 97페이지부터 이어 붙입니다.
+    appendix3="pdf/ch4-append-3.pdf"
+    if [ -f "$appendix3" ]; then
+      added3=$(pdfinfo "$appendix3" | awk '/^Pages:/ {print $2}')
+      if [ "${FORCE:-0}" = "1" ] || [ ! -f "$out/97.webp" ] || [ "$appendix3" -nt "$out/97.webp" ]; then
+        rm -f "$out"/{97..126}.webp "$out"/append3-*.png
+        pdftoppm -r "$DPI" -png "$appendix3" "$out/append3" 2>/dev/null
+        page=96
+        for f in "$out"/append3-*.png; do
+          [ -e "$f" ] || continue
+          page=$((page+1))
+          cwebp -quiet -q 82 "$f" -o "$out/$page.webp"
+          rm -f "$f"
+        done
+        [ "$page" -eq $((96+added3)) ] || { echo "세 번째 추가 PDF 변환 페이지 수가 일치하지 않습니다"; exit 1; }
+      fi
+      n=$((96+added3))
+    fi
   fi
   echo "  { id: \"$id\", title: \"$title\", pages: $n }," >> chapters.js
 done
