@@ -142,6 +142,13 @@ for i in 1 2 3 4 5; do
       fi
       n=$((73+added2))
     fi
+    # 광고 의사결정 '언제 버틴다' 슬라이드(96페이지) 교체.
+    hold_replacement="pdf/ch4-hold-replacement.pdf"
+    if [ -f "$hold_replacement" ] && { [ "${FORCE:-0}" = "1" ] || [ "$hold_replacement" -nt "$out/96.webp" ]; }; then
+      pdftoppm -f 1 -l 1 -singlefile -r "$DPI" -png "$hold_replacement" "$out/hold-replacement" 2>/dev/null
+      cwebp -quiet -q 82 "$out/hold-replacement.png" -o "$out/96.webp"
+      rm -f "$out/hold-replacement.png"
+    fi
   fi
   echo "  { id: \"$id\", title: \"$title\", pages: $n }," >> chapters.js
 done
