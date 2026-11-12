@@ -75,6 +75,7 @@ function showChapter(i) {
     for (const link of PAGE_LINKS[ch.id]?.[p] || []) {
       const anchor = document.createElement("a");
       anchor.className = "slide-link";
+      if (ch.id === "ch4" && p === 77) anchor.classList.add("slide-link--meta-goals");
       anchor.href = link.url;
       anchor.target = "_blank";
       anchor.rel = "noopener noreferrer";

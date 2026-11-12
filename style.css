@@ -124,6 +124,27 @@ body {
 .slide-link { position: absolute; cursor: pointer; }
 .slide-link:hover { outline: 2px solid #2563eb; outline-offset: 2px; }
 .slide-link:focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; }
+.slide-link--meta-goals {
+  border-bottom: 2px solid #2563eb;
+}
+.slide-link--meta-goals::after {
+  content: "↗ 도움말";
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  padding: 4px 7px;
+  border-radius: 4px;
+  background: #e8f0ff;
+  color: #145bd7;
+  font-size: clamp(10px, 1.4vw, 14px);
+  font-weight: 700;
+  pointer-events: none;
+}
+@media (max-width: 600px) {
+  .slide-link--meta-goals::after { content: "↗"; padding: 0 3px; }
+}
 
 .pages img {
   width: 100%;
